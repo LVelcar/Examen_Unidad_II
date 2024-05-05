@@ -54,6 +54,30 @@ function drawClock(x, y, hourOffset, minuteOffset, cityHourOffset, cityName) {
   let radius = 80;
   drawCircle(x, y, radius);
 
+  // Si es el reloj de La Paz, dibujar las manecillas.
+  if (cityName === "La Paz, BCS") {
+    // Dibujar manecilla de la hora.
+    let hourAngle = map(cityTime % 24, 0, 22, 0, TWO_PI) - HALF_PI;
+    let hourLength = 0.5 * radius;
+    let hourX = x + cos(hourAngle) * hourLength;
+    let hourY = y + sin(hourAngle) * hourLength;
+    line(x, y, hourX, hourY);
+
+    // Dibujar manecilla de los minutos.
+    let minuteAngle = map(cityMinutes, 0, 60, 0, TWO_PI) - HALF_PI;
+    let minuteLength = 0.8 * radius;
+    let minuteX = x + cos(minuteAngle) * minuteLength;
+    let minuteY = y + sin(minuteAngle) * minuteLength;
+    line(x, y, minuteX, minuteY);
+
+    // Dibujar manecilla de los segundos.
+    let secondAngle = map(citySeconds, 0, 60, 0, TWO_PI) - HALF_PI;
+    let secondLength = 0.9 * radius;
+    let secondX = x + cos(secondAngle) * secondLength;
+    let secondY = y + sin(secondAngle) * secondLength;
+    line(x, y, secondX, secondY);
+  }
+
   // Dibujar reloj.
   fill(0);
   circle(x, y, 5);
